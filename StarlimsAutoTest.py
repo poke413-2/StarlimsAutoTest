@@ -141,7 +141,7 @@ def ReflexTest(reflexTestCode):
     print("\n-- Reflex test [" + reflexTestCode + ": " + reflexTestName + "] is complete.")
 
     return
-    
+
 def OOS(testCode, step, ordno):
 
     #Select the OOS Alert button
@@ -258,7 +258,7 @@ def GetPanelName(testCode):
     conn.close()
     
     return panelName
-    
+
 def BackToDash(panelName, delay):
 
     #Start from the dashboard
@@ -307,7 +307,7 @@ def BackToDash(panelName, delay):
     #Clear the currently open application popup if there
     pyautogui.click(929,568)
     time.sleep(delay)
-    
+
 def BackToDashMod(panelName, delay):
 
     #Start from the dashboard
@@ -559,7 +559,7 @@ def SelectRun(runno):
     time.sleep(2)
 
     return
-    
+
 def FilterExistingSample(sampleNo):
 
     #Filter sample list for our sample
@@ -882,7 +882,7 @@ def InitVariables():
     InitDeliveryQueue()
     
     return
-    
+
 def InitDeliveryQueue():
 
     global DeliveryQueueCoord 
@@ -965,7 +965,7 @@ def InitReceiveByTeam():
     }
 
     return
-    
+
 def InitClinicalSampleLogin():
 
     global ClinLoginCoord 
@@ -1029,8 +1029,8 @@ def Main():
             
             if panelName != "Invalid testcode":
                 testName = GetTestName(testCode)
-                combo = PromptForAnalyteResults(testCode)                                     
-                                       
+                combo = PromptForAnalyteResults(testCode)
+
                 print("\nBegin test for [" + testCode + ": " + testName + "]...")
                 
                 ClinicalSampleLogin(testName, panelName)
