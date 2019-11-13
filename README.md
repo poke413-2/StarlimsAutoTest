@@ -30,4 +30,6 @@ StarlimsAutoTest is a python script to automate the workflow, from start to fini
   - 2nd recommended editor for python files for basic editing
 
 ## Usage
-Open command prompt in python folder. Run ```python StarlimsAutoTest.py```and continue following the prompt.
+- This script assumes a dual monitor 1920 x 1080 screen resolution.
+- Have Starlims V11 open, on your primary monitor, and logged in to the dashboard.
+- On your second monitor, open the command prompt in the python folder. Run ```python StarlimsAutoTest.py```and continue following the prompt.
