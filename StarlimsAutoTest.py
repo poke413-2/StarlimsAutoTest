@@ -116,7 +116,7 @@ def ReflexTest(reflexTestCode):
     #Process OOS until Alert button is not visible
     rgb = PIL.ImageGrab.grab().load()[1860,222]
     while str(rgb) == "(255, 226, 144)":
-        OOS(reflexTestCode, step, sampleNo)
+        OOS(reflexTestCode, sampleNo)
         pyautogui.moveTo(PendingTestsCoord["btnOOSAlert"])
         time.sleep(1)
         step = step + 1
@@ -142,7 +142,7 @@ def ReflexTest(reflexTestCode):
 
     return
 
-def OOS(testCode, step, ordno):
+def OOS(testCode, ordno):
 
     #Select the OOS Alert button
     #pyautogui.click(PendingTestsCoord["btnOOSAlert"])
@@ -387,6 +387,7 @@ def PromptForAnalyteResults(testCode):
                           " on ssc.CALCULATION = md.METADATAMETHODCODE" +
                           " where an.TESTCODE = " + testCode +
                           " and ssc.TYPEOFITEM = \'Prompt\'" + 
+                          " and LOOKUPEXPRESSION is not NULL" +
                           " and an.analyte = \'" + analyte + "\'")   
         cursor = cursor.fetchall()
        
@@ -401,9 +402,9 @@ def PromptForAnalyteResults(testCode):
             sql = str(cursor[0])
             result = re.search("arrResult(s)?\s*:=\s*{\s*", sql)
             
-            if result == "None":
+            if result is None:
                 #If we could not parse the result string for the list
-                print("\Enable to parse the prompt string, using manual result entry.")
+                print("\nUnable to parse the prompt string, using manual result entry.")
                 sel = 0
                 result = "Manual"
             else: 
@@ -450,19 +451,20 @@ def PromptForAnalyteResults(testCode):
             result = cursor[int(sel)-1][0]   
         
         sameFirstLetter = False
-    
-        #Does this analyte have results that have the same first letter? if so, we handle that differently
-        for outer, res in enumerate(cursor):
-            resultLetter = res[0]      
-            for inner, first in enumerate(cursor):
-                if outer != inner: #dont compare the same result option
-                    firstLetter = first[0]
-                    if resultLetter[:1] == firstLetter[:1]:
-                        sameFirstLetter = True
-                        break
-            else:
-                continue
-            break
+        
+        if result != "Manual":
+            #Does this analyte have results that have the same first letter? if so, we handle that differently
+            for outer, res in enumerate(cursor):
+                resultLetter = res[0]      
+                for inner, first in enumerate(cursor):
+                    if outer != inner: #dont compare the same result option
+                        firstLetter = first[0]
+                        if resultLetter[:1] == firstLetter[:1]:
+                            sameFirstLetter = True
+                            break
+                else:
+                    continue
+                break
         
         #print(analyte + " " + result)
         combo.append([analyte, result, int(sel)-1, sameFirstLetter])
@@ -479,7 +481,7 @@ def EnterResult(testCode, combo):
     
         #Is this a manual entry?
         if analyte[1] == "Manual":
-            input("Manual result entry enabled, press Enter to continue (after entering result and closing the result window)...")
+            input("-- Manual result entry enabled, press Enter to continue (after entering result and closing the result window)...")
         else:
             #Add results to sample
             pyautogui.doubleClick(825,offset)
@@ -666,8 +668,6 @@ def MyTeamsPendingTests(testCode, testName, combo):
     firstBracket = runTemplate.rfind("(", 0)
     equipment = runTemplate[firstBracket+1:result.start()]
     
-    print("equip: " + equipment)
-    
     #Select run tab in case runs already exist as it defaults to result tab
     pyautogui.click(PendingTestsCoord["tabRun"])
     time.sleep(2)
@@ -711,7 +711,7 @@ def MyTeamsPendingTests(testCode, testName, combo):
     #Process OOS until Alert button is not visible
     rgb = PIL.ImageGrab.grab().load()[1860,222]
     while str(rgb) == "(255, 226, 144)":
-        OOS(testCode, step, sampleNo)
+        OOS(testCode, sampleNo)
         pyautogui.moveTo(PendingTestsCoord["btnOOSAlert"])
         time.sleep(1)
         step = step + 1
@@ -863,7 +863,7 @@ def ClinicalSampleLogin(testName, panelName):
     pyautogui.click(ClinLoginCoord["btnCommit"])
     time.sleep(2)
     pyautogui.click(ClinLoginCoord["Commit_btnOk"])
-    time.sleep(9)
+    time.sleep(10)
 
     #Clear attachment window
     pyautogui.click(ClinLoginCoord["Report_btnClose"])
@@ -1037,7 +1037,7 @@ def Main():
                 ReceiveByTeam()
                 MyTeamsPendingTests(testCode, testName, combo)
                 ReleaseByPanel(password)
-                ReportDeliveryQueue(password) 
+                #ReportDeliveryQueue(password) 
                 
                 elapsed_time = time.time() - start_time
                 elapsed_time = time.strftime("%H:%M:%S", time.gmtime(elapsed_time))
