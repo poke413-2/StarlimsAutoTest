@@ -1,6 +1,10 @@
 # StarlimsAutoTest 
 
-StarlimsAutoTest is a python script to automate the workflow, from start to finish, of Starlims V11 tests. The main process includes login, receive in lab, create run, add samples to run, add results to run (including processing triggers), finalize run, release by panel, send to printer.
+StarlimsAutoTest is a python script to automate the workflow, from start to finish, of Starlims V11 tests. The main process includes login, receive in lab, create run, add samples to run, add results to run (including processing triggers), finalize run, release by panel, send to printer.  
+
+<p align="center">
+<img src="ezgif.com-video-to-gif.gif"/>
+</p>
 
 ## Installation
 
