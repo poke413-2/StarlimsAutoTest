@@ -5,7 +5,7 @@ StarlimsAutoTest is a python script to automate the workflow, from start to fini
 ## Installation
 
 #### Setup
-  - Create a folder to hold StarlimsAutoTest.py, get-pip.py
+  - Create a folder to hold StarlimsAutoTest.py and get-pip.py
 #### Python 3
   - Download python 3 for windows 10: https://www.python.org/downloads/release/python-380/
   - You want the "Windows x86-64 executable installer"
