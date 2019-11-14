@@ -143,10 +143,6 @@ def ReflexTest(reflexTestCode):
     return
 
 def OOS(testCode, ordno):
-
-    #Select the OOS Alert button
-    #pyautogui.click(PendingTestsCoord["btnOOSAlert"])
-    #time.sleep(2)
     
     #Connect to DB
     conn = pyodbc.connect('Driver={SQL Server};'
