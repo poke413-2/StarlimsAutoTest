@@ -18,7 +18,7 @@ StarlimsAutoTest is a python script to automate the workflow, from start to fini
 #### Pip
   - Go to URL: https://bootstrap.pypa.io/get-pip.py
   - Right-click, save as - save in the previously created python folder
-  - Open command prompt in the python folder, run ```pip install foobar```
+  - Open command prompt in the python folder, run ```python get-pip.py```
 #### Pyautogui
   - Open command prompt in the python folder, run ```pip install pyautogui```
 #### Visual Studio C++ Build Tools
