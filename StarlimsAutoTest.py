@@ -29,9 +29,7 @@ def Retest(testCode):
     
     testName = GetTestName(testCode)
     
-    #Execute trigger
-    #pyautogui.click(PendingTestsCoord["Alerts_btnExecute"])
-    #time.sleep(2)
+
     
     #OK
     #pyautogui.click(PendingTestsCoord["Alerts_btnDone"])
